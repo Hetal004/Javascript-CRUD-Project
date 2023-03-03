@@ -3,3 +3,20 @@
     display: flex;
     justify-content: center;
 }
+.button{
+    padding:15px
+}
+.button5{
+    padding:15px
+}
+
+.hideform{
+    display: none;
+    z-index: 1;
+    position: absolute;
+
+}
+.userdetailsform{
+    display: flex;
+    flex-direction: column;
+}

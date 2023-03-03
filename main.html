@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
     <title>JS Project</title>
+    <script src="delete.js"></script>
 </head>
 
 <body>
     <div class="main">
         <div class="createUser">
             <h3>CRUD Demo</h3>
-            <!-- <span class="btn button3">Create User</span> -->
             <button class="btn button3" type="submit" onclick="window.open('/addform.html' , 'popup' , 'height:500px;', 'width:500px')">Create User</button>
         </div>
-        <div class="container">
-            <table class="table">
+        <!-- <div class="container"> -->
+            <table id="table">
                 <thead>
                     <tr>
                         <th>Username</th>
@@ -29,15 +29,13 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${userName}</td>
+                        <td>abcd</td>
                         <td>${email}</td>
                         <td>${role}</td>
                         <td>${updatedTime}</td>
-                        <td>
-                            <div class="buttons">
-                                <span class="btn button1">Edit</span>
-                                <span class="btn button2">Delete</span>
-                            </div>
+                        <td class="buttons">
+                            <button onclick="onEdit(this)" class="btn">Update</button>
+                            <button onclick="onDelete(this)" class="btn">Delete</button>
                         </td>
                     </tr>
                     <tr>
@@ -45,16 +43,14 @@
                         <td>${email}</td>
                         <td>${role}</td>
                         <td>${updatedTime}</td>
-                        <td>
-                            <div class="buttons">
-                                <span class="btn button1">Edit</span>
-                                <span class="btn button2">Delete</span>
-                            </div>
+                        <td class="buttons">
+                            <button onclick="onUpdate(this)" class="btn">Update</button>
+                            <button onclick="onDelete(this)" class="btn">Delete</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
+        <!-- </div> -->
     </div>
 </body>
 

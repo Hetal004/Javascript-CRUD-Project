@@ -1,11 +1,13 @@
-.container {
+.main {
+    background-image: linear-gradient(180deg, rgb(247, 215, 134), rgb(250, 191, 169, 0.6), rgb(250, 165, 185, 0.5));
+    height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .createUser {
-    /* display: flex;
-    justify-content: center; */
+    width: 32%;
     margin: 10px;
 }
 
@@ -15,22 +17,21 @@ h3 {
     margin: 0;
 }
 
-.table {
+#table {
     border: 2px solid black;
-    border-collapse:collapse;
+    padding: 5px;
+    border-radius: 20px;
 }
 
-
-.table tr:nth-child(even) {
-    background-color: #f2f2f2;
+#table tr:hover {
+    background-color: rgb(250, 191, 169, 0.3);
 }
 
-.table tr:hover {
-    background-color: #ddd;
+th {
+    background-image: linear-gradient(180deg, rgb(247, 215, 134), rgb(250, 191, 169, 0.6), rgb(250, 165, 185, 0.2));
 }
 
 td,th {
-    border-bottom: 1px solid black;
     padding: 18px;
 }
 
@@ -40,20 +41,12 @@ td,th {
 }
 
 .btn {
+    cursor: pointer;
     padding: 10px;
     border-radius: 10px;
-}
-
-.button1 {
-    background-color: lightskyblue;
-}
-
-.button2 {
-    background-color: rgb(248, 96, 96);
+    background-color: rgb(250 165 185 / 50%);
 }
 
 .button3 {
-    background-color: lightgreen;
-    right: 50px;
+    float: right;
 }
-

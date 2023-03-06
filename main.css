@@ -38,6 +38,7 @@ td,th {
 .buttons {
     display: flex;
     gap: 15px;
+    
 }
 
 .btn {

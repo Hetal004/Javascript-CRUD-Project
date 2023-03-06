@@ -8,14 +8,13 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="addform.css" class="src">
     <title>JS Project</title>
-    <script src="delete.js"></script>
+    
 </head>
 
 <body>
     <div class="main">
         <div class="createUser">
             <h3>CRUD Demo</h3>
-            <!-- <span class="btn button3">Create User</span> -->
             <button class="btn button3 " type="submit">Create User</button>
         </div>
         <dialog open class="hideform">
@@ -41,26 +40,23 @@
                         <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <!-- <th>Last Updated</th>
-                        <th>Tools</th> -->
+                        <!-- <td>${updatedTime}</td> -->
+                        <th class="buttons">
+                            Action
+                        </th>
+                        <th>
+                            TIME
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                        <td>${userName}</td>
-                        <td>${email}</td>
-                        <td>${role}</td>
-                        <td>${updatedTime}</td>
-                        <td class="buttons">
-                            <button onclick="onUpdate(this)" class="btn">Update</button>
-                            <button onclick="onDelete(this)" class="btn">Delete</button>
-                        </td>
-                    </tr> -->
+                    
                 </tbody>
             </table>
-        <!-- </div> -->
+        
     </div>
-    <script src="add.js"></script>
+    <script  src="add.js"></script>
+    <script  src="delete.js"></script>
 
 </body>
 

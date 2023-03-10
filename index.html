@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="addform.css" class="src">
+    <title>JS Project</title>
+
+</head>
+
+<body>
+    <div class="main">
+        <dialog open class="hideform">
+            <h2 id="form_title">Add User</h2>
+            <form class="userdetailsform" id="form1">
+                <input type="text" id="uid" name="uid">
+                <label for="userName">User Name</label>
+                <input type="text" autofocus name="name" id="userName">
+
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email">
+
+                <label for="role">Role</label>
+                <input type="text" name="role" id="role">
+
+                <input type="submit" class="button" id="submit" value="Submit">
+                <input type="button" class="button5" value="Cancel">
+            </form>
+        </dialog>
+        <div class="container">
+            <div class="createUser">
+                <h3>CRUD Demo</h3>
+                <button class="btn button3" type="submit">Create User</button>
+            </div>
+
+            <table class="table" id="table">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Tools</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script type="module" src="delete.js"></script>
+    <script type="module" src="edit.js"></script>
+    <script type="module" src="add.js"></script>
+
+</body>
+
+</html>

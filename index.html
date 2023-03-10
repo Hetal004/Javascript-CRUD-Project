@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="addform.css" class="src">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/addform.css" class="src">
     <title>JS Project</title>
 
 </head>
@@ -21,6 +21,12 @@
 
                 <form id="form" class="userdetailsform" >
                     <div class="userdetails">
+                        <div class="form-field">
+
+                            <input type="text" id="uid" placeholder="Id" />
+
+                        </div>
+
                         <div class="form-field">
                             
                             <input type="text" id="userName" placeholder="User Name" />
@@ -60,22 +66,22 @@
             <table class="table" id="table">
                 <thead>
                     <tr>
+                        <th>Uid</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <th class="buttons">
-                            Action
-                        </th>
+                        <th class="buttons">Action</th>
                     </tr>
                 </thead>
                 <tbody>
 
                 </tbody>
             </table>
-
         </div>
-        <script src="add.js"></script>
-        <script src="delete.js"></script>
+    </div>
+    <script type="module" src="./js/delete.js"></script>
+    <script type="module" src="./js/edit.js"></script>
+    <script type="module" src="./js/add.js"></script>
 
 </body>
 

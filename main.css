@@ -1,13 +1,32 @@
-.main {
-    background-image: linear-gradient(180deg, rgb(247, 215, 134), rgb(250, 191, 169, 0.6), rgb(250, 165, 185, 0.5));
+body {
+    margin: 0;
     height: 100vh;
+}
+
+.main {
+    background-image: url('./images/background.png');
+    /* background-image:  url('https://www.simplilearn.com/ice9/free_resources_article_thumb/What_is_Web_1_0_Web_2_0_and_Web_3_0.jpg'); */
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+}
+
+.container {
+    padding: 25px;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+    width: 50rem;
 }
 
 .createUser {
-    width: 32%;
     margin: 10px;
 }
 
@@ -19,20 +38,42 @@ h3 {
 
 #table {
     border: 2px solid black;
-    padding: 5px;
-    border-radius: 20px;
+    padding: 8px;
+    border-collapse: collapse;
 }
 
 #table tr:hover {
     background-color: rgb(250, 191, 169, 0.3);
 }
 
-th {
-    background-image: linear-gradient(180deg, rgb(247, 215, 134), rgb(250, 191, 169, 0.6), rgb(250, 165, 185, 0.2));
+#table th:nth-child(even) {
+    background-color: #4fb9e7;
 }
 
-td,th {
+#table th:nth-child(odd) {
+    color: black;
+    background-color: #a9d9f8;
+}
+
+#table tr:nth-child(even) {
+    color: #ffffff;
+    background-color: #1a1a1a;
+}
+
+#table tr:nth-child(odd) {
+    color: #ffffff;
+    background-color: #404040;
+}
+
+td,
+th {
+    text-align: center;
     padding: 18px;
+}
+
+tr th:first-child,
+tr td:first-child {
+    display: none;
 }
 
 .buttons {
@@ -44,7 +85,7 @@ td,th {
     cursor: pointer;
     padding: 10px;
     border-radius: 10px;
-    background-color: rgb(250 165 185 / 50%);
+    background-color: #4fb9e7ba;
 }
 
 .button3 {

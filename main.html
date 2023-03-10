@@ -8,59 +8,53 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="addform.css" class="src">
     <title>JS Project</title>
-    <script src="delete.js"></script>
+
 </head>
 
 <body>
     <div class="main">
-        <div class="createUser">
-            <h3>CRUD Demo</h3>
-            <!-- <span class="btn button3">Create User</span> -->
-            <button class="btn button3 " type="submit">Create User</button>
-        </div>
         <dialog open class="hideform">
-            <h2>Add User</h2>
-            <form class="userdetailsform">
+            <h2 id="form_title">Add User</h2>
+            <form class="userdetailsform" id="form1">
+                <input type="text" id="uid" name="uid">
                 <label for="userName">User Name</label>
                 <input type="text" autofocus name="name" id="userName">
-    
+
                 <label for="email">Email</label>
-                <input type="email"  name="email" id="email">
-    
+                <input type="email" name="email" id="email">
+
                 <label for="role">Role</label>
-                <input type="text"  name="role" id="role">
-                
-                <input type="submit" class="button" id="submit" value="Submit" >
-                <input type="button" class="button5" value="Cancel" >
+                <input type="text" name="role" id="role">
+
+                <input type="submit" class="button" id="submit" value="Submit">
+                <input type="button" class="button5" value="Cancel">
             </form>
         </dialog>
         <div class="container">
+            <div class="createUser">
+                <h3>CRUD Demo</h3>
+                <button class="btn button3" type="submit">Create User</button>
+            </div>
+
             <table class="table" id="table">
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <!-- <th>Last Updated</th>
-                        <th>Tools</th> -->
+                        <th>Tools</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- <tr>
-                        <td>${userName}</td>
-                        <td>${email}</td>
-                        <td>${role}</td>
-                        <td>${updatedTime}</td>
-                        <td class="buttons">
-                            <button onclick="onUpdate(this)" class="btn">Update</button>
-                            <button onclick="onDelete(this)" class="btn">Delete</button>
-                        </td>
-                    </tr> -->
+
                 </tbody>
             </table>
-        <!-- </div> -->
+        </div>
     </div>
-    <script src="add.js"></script>
+    <script type="module" src="delete.js"></script>
+    <script type="module" src="edit.js"></script>
+    <script type="module" src="add.js"></script>
 
 </body>
 

@@ -1,5 +1,7 @@
 import { updateUserdata, onEdit } from './edit.js';
 import {onDelete} from './delete.js';
+import { postapi } from './createUser.js';
+// import {postapi} from './createUser';
 // const updateUserdata = require("./edit.js");
 
 const createUserBtn = document.querySelector('.button3')
@@ -7,9 +9,10 @@ const btn = document.querySelector('.button')
 const cancel = document.querySelector('.button5')
 const blur = document.querySelector('.button3')
 
-const userEntries = [];
+export const userEntries = [];
 
-document.getElementById("submit").onclick = function () {
+document.getElementById("submit").onclick = async function (e) {
+    e.preventDefault();
     let tmpid = document.getElementById("uid").value;
     console.log(tmpid);
     if (tmpid == "") {
@@ -22,12 +25,14 @@ document.getElementById("submit").onclick = function () {
             email: document.getElementById("email").value,
             role: document.getElementById("role").value
         };
+        
+        
         const id = row.insertCell(0);
         const userName = row.insertCell(1);
         const email = row.insertCell(2);
         const role = row.insertCell(3);
         const action = row.insertCell(4);
-
+        
         id.innerHTML = entry.id;
         userName.innerHTML = entry.userName;
         email.innerHTML = entry.email;
@@ -35,11 +40,20 @@ document.getElementById("submit").onclick = function () {
         const editButton = document.createElement("button");
         editButton.addEventListener("click", onEdit);
         action.appendChild(editButton);
-        // action.innerHTML = `<button onClick="${onEdit(this)}">Edit</button>
-        //     <button onclick="${onDelete(this)}">Delete</button>`;
 
+        const deleteButton = document.createElement("button");
+        const textForDeleteButton = document.createTextNode("Delete");
+        deleteButton.appendChild(textForDeleteButton);
+        deleteButton.addEventListener("click", onDelete);
+        action.appendChild(deleteButton);
+  
+        
         userEntries.push(entry);
-        handleStoreInLocal()
+        
+        // handleStoreInLocal()
+        const data = await postapi(entry)
+        
+        console.log(data);
         validate()
     }
     else {

@@ -1,22 +1,124 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
 .container{
     
     display: flex;
     justify-content: center;
+    position: relative;
+    flex-direction: column;   
 }
-.button{
-    padding:15px
+
+.container:enabled {
+    pointer-events: none;
+  }
+.button5:hover{
+    cursor:pointer;
+    box-shadow: -2px -2px 5px -white, 2px 2px 5px #050609;
 }
-.button5{
-    padding:15px
+.button:hover{
+    cursor:pointer;
+    box-shadow: -2px -2px 5px -white, 2px 2px 5px #BABECC;
 }
+
+
+.icon{
+    right: 5;
+    top: 5;
+    float: right;
+}
+.formtitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* padding-left: 70px; */
+    
+}
+.userDetailsContainer{
+    height: 100%;
+    width:100%;
+    padding: 0;
+    margin: 0;
+
+    /* overflow: hidden; */
+}
+
 
 .hideform{
     display: none;
     z-index: 1;
     position: absolute;
-
+    background-color: #EBECF0;
+    width: 300px;
+    height: auto;
+    animation-name: example;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    border-radius: 5px;
+    /* overflow: hidden; */
+ 
 }
 .userdetailsform{
     display: flex;
     flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 10px;
+  
 }
+.userdetails{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: black;
+    width: 95%;
+}
+
+.form-field{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@keyframes example {
+    0%   {margin-top: 0%;}
+    100% {margin-top: 5%;}
+  }
+h2{
+    display:flex ;
+    justify-content: center;
+    
+  }
+
+input {
+    width: 90%;
+    border: 0;
+    outline: 0;
+    border-radius: 20px;
+
+    background-color:#EBECF0;
+    text-shadow: 1px 1px 0 whitesmoke;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    padding-top: 15px;
+    box-shadow:  inset 2px 2px 5px #BABECC, inset -5px -5px 10px white;
+    
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+label{
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+::placeholder { 
+    margin-left: 4px;
+    opacity: 1; /* Firefox */
+  }
+  
+
+input:focus {
+      box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px white;
+    }

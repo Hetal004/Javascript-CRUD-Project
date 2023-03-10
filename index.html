@@ -8,55 +8,74 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="addform.css" class="src">
     <title>JS Project</title>
-    
+
 </head>
 
 <body>
     <div class="main">
-        <div class="createUser">
-            <h3>CRUD Demo</h3>
-            <button class="btn button3 " type="submit">Create User</button>
-        </div>
-        <dialog open class="hideform">
-            <h2>Add User</h2>
-            <form class="userdetailsform">
-                <label for="userName">User Name</label>
-                <input type="text" autofocus name="name" id="userName">
-    
-                <label for="email">Email</label>
-                <input type="email"  name="email" id="email">
-    
-                <label for="role">Role</label>
-                <input type="text"  name="role" id="role">
-                
-                <input type="submit" class="button" id="submit" value="Submit" >
-                <input type="button" class="button5" value="Cancel" >
-            </form>
-        </dialog>
+            <div class="hideform" >
+                <div class="icon">*</div>
+                <div class="formtitle">
+                    <h2>Add User</h2>
+                </div>
+
+                <form id="form" class="userdetailsform" >
+                    <div class="userdetails">
+                        <div class="form-field">
+                            
+                            <input type="text" id="userName" placeholder="User Name" />
+                            
+                            <small id="small"></small>
+                        </div>
+                        <div class="form-field">
+                            
+                            <input type="email" id="email" placeholder="Email" />
+                            
+                            <small></small>
+                        </div>
+                        <div class="form-field">
+                            
+                            <input type="text" id="role" placeholder="Role" />
+                            
+                            <small ></small>
+                        </div>
+
+                    
+
+                        <div class="form-field">
+
+                            <input type="submit" class="button" id="submit" value="Submit">
+                        </div>
+                        <div class="form-field">
+                            <input type="submit" class="button5" id="" value="Cancel">
+                        </div>
+                    </div>
+                </form>
+            </div>
         <div class="container">
+            <h3>CRUD Demo</h3>
+            <div class="createUser">
+                <button class="btn button3 " type="submit">Create User</button>
+            </div>
             <table class="table" id="table">
                 <thead>
                     <tr>
                         <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
-                        <!-- <td>${updatedTime}</td> -->
                         <th class="buttons">
                             Action
-                        </th>
-                        <th>
-                            TIME
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                 </tbody>
             </table>
-        
-    </div>
-    <script  src="add.js"></script>
-    <script  src="delete.js"></script>
+
+        </div>
+        <script src="add.js"></script>
+        <script src="delete.js"></script>
 
 </body>
 

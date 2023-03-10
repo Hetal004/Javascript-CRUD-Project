@@ -1,3 +1,9 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
 .main {
     background-image: linear-gradient(180deg, rgb(247, 215, 134), rgb(250, 191, 169, 0.6), rgb(250, 165, 185, 0.5));
     height: 100vh;
@@ -7,7 +13,7 @@
 }
 
 .createUser {
-    width: 32%;
+
     margin: 10px;
 }
 
@@ -50,4 +56,12 @@ td,th {
 
 .button3 {
     float: right;
+}
+.success{
+    border: .2px solid;
+    border-color: green;
+}
+.error{
+    border: .2px solid;
+    border-color: red;
 }

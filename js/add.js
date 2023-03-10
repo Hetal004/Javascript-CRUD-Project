@@ -1,5 +1,6 @@
 import { updateUserdata, onEdit } from './edit.js';
 import {onDelete} from './delete.js';
+import { getusers } from './get_all_users.js';
 // const updateUserdata = require("./edit.js");
 
 const createUserBtn = document.querySelector('.button3')
@@ -32,11 +33,18 @@ document.getElementById("submit").onclick = function () {
         userName.innerHTML = entry.userName;
         email.innerHTML = entry.email;
         role.innerHTML = entry.role;
+
         const editButton = document.createElement("button");
+        const textForEditButton = document.createTextNode("Edit");
+        editButton.appendChild(textForEditButton);
         editButton.addEventListener("click", onEdit);
         action.appendChild(editButton);
-        // action.innerHTML = `<button onClick="${onEdit(this)}">Edit</button>
-        //     <button onclick="${onDelete(this)}">Delete</button>`;
+
+        const deleteButton = document.createElement("button");
+        const textForDeleteButton = document.createTextNode("Delete");
+        deleteButton.appendChild(textForDeleteButton);
+        deleteButton.addEventListener("click", onDelete);
+        action.appendChild(deleteButton);
 
         userEntries.push(entry);
         handleStoreInLocal()
@@ -96,30 +104,27 @@ export function handleStoreInLocal() {
     localStorage.setItem("userEntries", userdata)
 }
 
-export function onLoad() {
+export async function onLoad() {
     console.log("onload...");
-    const userdata = localStorage.getItem("userEntries")
-    const fetcheddata= JSON.parse(userdata)
-    
-    if (fetcheddata === null) return;
-    const datavalues = fetcheddata.values();
 
-    for (const value of datavalues) {
-        userEntries.push(value);
-        console.log(value);
         const table = document.getElementById("table");
         const row = table.insertRow(-1);
-
-        const id = row.insertCell(0);
-        const userName = row.insertCell(1);
-        const email = row.insertCell(2);
-        const role = row.insertCell(3);
+        
+        const id2 = row.insertCell(0);
+        const userName2 = row.insertCell(1);
+        const email2 = row.insertCell(2);
+        const role2 = row.insertCell(3);
         const action = row.insertCell(4);
-
-        id.innerHTML = value.id;
-        userName.innerHTML = value.userName;
-        email.innerHTML = value.email;
-        role.innerHTML = value.role;
+        
+        const {data: {users}} = await getusers();
+        console.log(users);
+        for (let i = 0; i < users.length; i++) {
+            console.log(users[i].id);
+            id2.innerHTML = users[i].id;
+            userName2.innerHTML = users[i].name;
+            email2.innerHTML = users[i].email;
+            role2.innerHTML = users[i].role;
+        }
 
         const editButton = document.createElement("button");
         const textForEditButton = document.createTextNode("Edit");
@@ -132,11 +137,9 @@ export function onLoad() {
         deleteButton.appendChild(textForDeleteButton);
         deleteButton.addEventListener("click", onDelete);
         action.appendChild(deleteButton);
-
-    }
+    // }
 }
 document.addEventListener('DOMContentLoaded', onLoad);
-
 
 
 const userNameEl = document.querySelector('#userName');

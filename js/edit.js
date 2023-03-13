@@ -5,15 +5,17 @@ export async function onEdit() {
         const hideform = document.querySelector('.hideform')
         const selectedRow = this.parentElement.parentElement;
         console.log(selectedRow);
+
+        // #fetch id from url
         hideform.style.display = "block";
 
         let form = document.getElementById('form1');
-        const {data:{id , name , email , role}} = await getapi();
+        const {data:{users}} = await getapi( form.uid);
 
-        form.uid.value = id;
-        form.userName.value = name;
-        form.email.value = email;
-        form.role.value = role;
+        form.uid.value = users.id;
+        form.userName.value = users.userName;
+        form.email.value = users.email;
+        form.role.value = users.role;
         document.querySelector(".formtitle h2").innerHTML = 'Update User';
     }
 }

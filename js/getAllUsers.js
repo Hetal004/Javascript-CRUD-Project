@@ -3,7 +3,7 @@ export async function getusers() {
     try {
         const response = await fetch(getUsers);
         const alldata = await response.json();
-        console.log(alldata);
+        // console.log(alldata);
         return alldata;
     }
     catch (err) { 

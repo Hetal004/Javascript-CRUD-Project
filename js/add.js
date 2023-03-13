@@ -1,9 +1,7 @@
 import { updateUserdata, onEdit } from './edit.js';
 import {onDelete} from './delete.js';
 import { postapi } from './createUser.js';
-// import {postapi} from './createUser';
-import { getusers } from './get_all_users.js';
-// const updateUserdata = require("./edit.js");
+import { getusers } from './getAllUsers.js';
 
 const createUserBtn = document.querySelector('.button3')
 const btn = document.querySelector('.button')
@@ -16,9 +14,9 @@ document.getElementById("submit").onclick = async function (e) {
     e.preventDefault();
     validate()
     let tmpid = document.getElementById("uid").value;
-    console.log(tmpid);
+    // console.log(tmpid);
     if (tmpid == "" ) {
-        console.log("submit ...");
+        // console.log("submit ...");
         const table = document.getElementById("table");
         const row = table.insertRow(-1);
         const entry = {
@@ -51,21 +49,19 @@ document.getElementById("submit").onclick = async function (e) {
         deleteButton.appendChild(textForDeleteButton);
         deleteButton.addEventListener("click", onDelete);
         action.appendChild(deleteButton);
-  
         
-        userEntries.push(entry);
+        // userEntries.push(entry);
         
         // handleStoreInLocal()
         const data = await postapi(entry)
         
-        console.log(data);
+        // console.log(data);
        
     }
     else {
-        console.log(tmpid);
-        validate()
+        // console.log(tmpid);
+        validate() 
         updateUserdata(tmpid)
-
     }
     // const hideFormAgain = document.querySelector('.hideform')
     hideform.style.display = "none";
@@ -123,10 +119,10 @@ function resetForm(input) {
 // }
 
 export async function onLoad() {
-    console.log("onload...");
+    // console.log("onload...");
 
     const {data: {users}} = await getusers();
-    console.log(users);
+    // console.log(users);
     for (let i = 0; i < users.length; i++) {
             const table = document.getElementById("table");
             const row = table.insertRow(-1);
@@ -137,7 +133,7 @@ export async function onLoad() {
             const role2 = row.insertCell(3);
             const action = row.insertCell(4);
 
-            console.log(users[i].id);
+            // console.log(users[i].id);
             id2.innerHTML = users[i].id;
             userName2.innerHTML = users[i].userName;
             email2.innerHTML = users[i].email;
@@ -171,7 +167,7 @@ const isRequired = value => value === '' ? false : true;
 const isBetween = (length, min, max) => length < min || length > max ? false : true;
 
 const checkUsername = () => {
-    console.log('Checking username')
+    // console.log('Checking username')
     let valid = false;
 
     const min = 3,
@@ -266,7 +262,7 @@ const showSuccessMessage = (input) => {
  }
 
 const validate = () => {
-    console.log("validate called...")
+    // console.log("validate called...")
 
     let isUsernameValid = checkUsername(),
         isEmailValid = checkEmail(),

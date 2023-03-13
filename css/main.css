@@ -6,13 +6,7 @@ body{
 }
 
 .main {
-    background-image: linear-gradient(180deg, rgb(247, 215, 134), rgb(250, 191, 169, 0.6), rgb(250, 165, 185, 0.5));
-    height: 100vh;
-}
-
-.main {
     background-image: url('../images/background.png');
-    /* background-image:  url('https://www.simplilearn.com/ice9/free_resources_article_thumb/What_is_Web_1_0_Web_2_0_and_Web_3_0.jpg'); */
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -29,12 +23,11 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 15px;
     width: 50rem;
 }
 
 .createUser {
-    margin: 10px;
+    margin-bottom: 20px;
 }
 
 h3 {

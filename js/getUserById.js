@@ -1,6 +1,6 @@
 
-export async function getapi() {
-    const getUserByIdUrl = "http://192.168.1.123:3000/users/";
+export async function getapi(id) {
+    const getUserByIdUrl = "http://192.168.1.123:3000/users/" + id ;
     try {const response = await fetch(getUserByIdUrl);
     const data = await response.json();
     console.log(data);

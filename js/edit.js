@@ -6,23 +6,21 @@ export async function onEdit() {
         const selectedRow = this.parentElement.parentElement;
         console.log(selectedRow);
 
-        // #fetch id from url
-        // let form = document.getElementById('form1');
-        // form.uid.value = selectedRow.cells[0].innerHTML;
-        // form.userName.value = selectedRow.cells[1].innerHTML;
-        // form.email.value = selectedRow.cells[2].innerHTML;
-        // form.role.value = selectedRow.cells[3].innerHTML;
-        // document.querySelector(".formtitle h2").innerHTML = 'Update User';
+        
         hideform.style.display = "block";
 
         let form = document.getElementById('form1');
-        const {data:{users}} = await getapi( form.uid);
+        const rowId = selectedRow.cells[0].innerHTML;
+        console.log(rowId);
 
-        form.uid.value = users.id;
-        form.userName.value = users.userName;
-        form.email.value = users.email;
-        form.role.value = users.role;
+        const {data:{id , userName , email , role}} = await getapi(rowId);
+        if(rowId === id){
+        
+        form.userName.value = userName;
+        form.email.value = email;
+        form.role.value = role;
         document.querySelector(".formtitle h2").innerHTML = 'Update User';
+        }
     }
 }
 export function updateUserdata(tmpid) {

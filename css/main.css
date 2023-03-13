@@ -79,7 +79,7 @@ th {
 }
 
 tr th:first-child,
-tr td:first-child, .hideinput {
+tr td:first-child, #uid {
     display: none;
 }
 

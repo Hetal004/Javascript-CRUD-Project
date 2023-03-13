@@ -107,36 +107,37 @@ export function handleStoreInLocal() {
 export async function onLoad() {
     console.log("onload...");
 
-        const table = document.getElementById("table");
-        const row = table.insertRow(-1);
-        
-        const id2 = row.insertCell(0);
-        const userName2 = row.insertCell(1);
-        const email2 = row.insertCell(2);
-        const role2 = row.insertCell(3);
-        const action = row.insertCell(4);
-        
-        const {data: {users}} = await getusers();
-        console.log(users);
-        for (let i = 0; i < users.length; i++) {
+    const {data: {users}} = await getusers();
+    console.log(users);
+    for (let i = 0; i < users.length; i++) {
+            const table = document.getElementById("table");
+            const row = table.insertRow(-1);
+            
+            const id2 = row.insertCell(0);
+            const userName2 = row.insertCell(1);
+            const email2 = row.insertCell(2);
+            const role2 = row.insertCell(3);
+            const action = row.insertCell(4);
+
             console.log(users[i].id);
             id2.innerHTML = users[i].id;
-            userName2.innerHTML = users[i].name;
+            userName2.innerHTML = users[i].userName;
             email2.innerHTML = users[i].email;
             role2.innerHTML = users[i].role;
+
+            const editButton = document.createElement("button");
+            const textForEditButton = document.createTextNode("Edit");
+            editButton.appendChild(textForEditButton);
+            editButton.addEventListener("click", onEdit);
+            action.appendChild(editButton);
+    
+            const deleteButton = document.createElement("button");
+            const textForDeleteButton = document.createTextNode("Delete");
+            deleteButton.appendChild(textForDeleteButton);
+            deleteButton.addEventListener("click", onDelete);
+            action.appendChild(deleteButton);
         }
 
-        const editButton = document.createElement("button");
-        const textForEditButton = document.createTextNode("Edit");
-        editButton.appendChild(textForEditButton);
-        editButton.addEventListener("click", onEdit);
-        action.appendChild(editButton);
-
-        const deleteButton = document.createElement("button");
-        const textForDeleteButton = document.createTextNode("Delete");
-        deleteButton.appendChild(textForDeleteButton);
-        deleteButton.addEventListener("click", onDelete);
-        action.appendChild(deleteButton);
     // }
 }
 document.addEventListener('DOMContentLoaded', onLoad);

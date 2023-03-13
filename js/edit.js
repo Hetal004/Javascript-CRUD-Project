@@ -6,10 +6,10 @@ export function onEdit() {
         console.log(selectedRow);
         let form = document.getElementById('form1');
         form.uid.value = selectedRow.cells[0].innerHTML;
-        form.name.value = selectedRow.cells[1].innerHTML;
+        form.userName.value = selectedRow.cells[1].innerHTML;
         form.email.value = selectedRow.cells[2].innerHTML;
         form.role.value = selectedRow.cells[3].innerHTML;
-        document.getElementById("form_title").innerHTML = 'Update User';
+        document.querySelector(".formtitle h2").innerHTML = 'Update User';
         hideform.style.display = "block";
     }
 }

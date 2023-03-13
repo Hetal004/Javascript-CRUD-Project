@@ -13,9 +13,10 @@ export const userEntries = [];
 
 document.getElementById("submit").onclick = async function (e) {
     e.preventDefault();
+    validate()
     let tmpid = document.getElementById("uid").value;
     console.log(tmpid);
-    if (tmpid == "") {
+    if (tmpid == "" ) {
         console.log("submit ...");
         const table = document.getElementById("table");
         const row = table.insertRow(-1);
@@ -54,11 +55,13 @@ document.getElementById("submit").onclick = async function (e) {
         const data = await postapi(entry)
         
         console.log(data);
-        validate()
+       
     }
     else {
         console.log(tmpid);
+        validate()
         updateUserdata(tmpid)
+
     }
     // const hideFormAgain = document.querySelector('.hideform')
     hideform.style.display = "none";
@@ -274,7 +277,8 @@ const validate = () => {
         return true   
     }
     else{
-        return false
+        alert('Please enter valid details.')
+        return  false;
     }
     
 };

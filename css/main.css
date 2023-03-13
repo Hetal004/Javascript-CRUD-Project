@@ -107,5 +107,9 @@ tr td:first-child, #uid {
     border: .2px solid;
     border-color: red;
 }
+.clear{
+    border: none;
+    border-color: none;
+}
 
 

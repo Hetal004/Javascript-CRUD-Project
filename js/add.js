@@ -92,30 +92,35 @@ btn.addEventListener('click', function () {
     hideform.style.display = "none";
     container.style.filter = "blur(0px)";
     resetForm()
-    handleStoreInLocal()
+    // handleStoreInLocal()
 }
 
 )
-const cancelAddUser = document.querySelector('.hideform')
 cancel.addEventListener('click', function () {
     hideform.style.display = "none";
     container.style.filter = "blur(0px)";
     resetForm()
 })
 
-function resetForm() {
+function resetForm(input) {
     document.getElementById("uid").value = "";
     document.getElementById("userName").value = "";
     document.getElementById("email").value = "";
     document.getElementById("role").value = "";
+    
+    const formField = input;
+
+    formField.classList.remove('success');
+    formField.classList.remove('error');
+    formField.classList.add('clear');
     // selectedRow = null;
 }
 
-export function handleStoreInLocal() {
+// export function handleStoreInLocal() {
 
-    const userdata = JSON.stringify(userEntries)
-    localStorage.setItem("userEntries", userdata)
-}
+//     const userdata = JSON.stringify(userEntries)
+//     localStorage.setItem("userEntries", userdata)
+// }
 
 export async function onLoad() {
     console.log("onload...");

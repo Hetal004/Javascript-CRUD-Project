@@ -1,16 +1,20 @@
 import { onLoad } from "./add.js";
-export function onEdit() {
+import { getapi } from "./getUserById.js";
+export async function onEdit() {
     if (confirm('Are you sure to edit this record ?')) {
         const hideform = document.querySelector('.hideform')
         const selectedRow = this.parentElement.parentElement;
         console.log(selectedRow);
-        let form = document.getElementById('form1');
-        form.uid.value = selectedRow.cells[0].innerHTML;
-        form.name.value = selectedRow.cells[1].innerHTML;
-        form.email.value = selectedRow.cells[2].innerHTML;
-        form.role.value = selectedRow.cells[3].innerHTML;
-        document.getElementById("form_title").innerHTML = 'Update User';
         hideform.style.display = "block";
+
+        let form = document.getElementById('form1');
+        const {data:{id , name , email , role}} = await getapi();
+
+        form.uid.value = id;
+        form.userName.value = name;
+        form.email.value = email;
+        form.role.value = role;
+        document.querySelector(".formtitle h2").innerHTML = 'Update User';
     }
 }
 export function updateUserdata(tmpid) {

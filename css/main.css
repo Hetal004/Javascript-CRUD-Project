@@ -24,6 +24,7 @@ body{
     flex-direction: column;
     justify-content: center;
     width: 50rem;
+    margin-top: 20px;
 }
 
 .createUser {
@@ -40,7 +41,12 @@ h3 {
     border: 2px solid black;
     padding: 8px;
     border-collapse: collapse;
+   
 }
+thead{
+    overflow-y: scroll;
+}
+
 
 #table tr:hover {
     background-color: rgb(250, 191, 169, 0.3);

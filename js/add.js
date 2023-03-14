@@ -1,42 +1,185 @@
 import { updateUserdata, onEdit } from './edit.js';
-import {onDelete} from './delete.js';
+import { onDelete } from './delete.js';
 import { postapi } from './createUser.js';
 import { getusers } from './getAllUsers.js';
 
 const createUserBtn = document.querySelector('.button3')
 const btn = document.querySelector('.button')
 const cancel = document.querySelector('.button5')
+const close = document.querySelector('.img')
 const blur = document.querySelector('.button3')
 
 export const userEntries = [];
 
 document.getElementById("submit").onclick = async function (e) {
     e.preventDefault();
-    validate()
+
     let tmpid = document.getElementById("uid").value;
     // console.log(tmpid);
-    if (tmpid == "" ) {
-        // console.log("submit ...");
+    if (tmpid == "") {
+
+        if (validate()) {
+
+
+            const table = document.getElementById("table");
+            const row = table.insertRow(-1);
+            const entry = {
+                id: window.crypto.randomUUID(), // generate unique id for each entry
+                userName: document.getElementById("userName").value,
+                email: document.getElementById("email").value,
+                role: document.getElementById("role").value
+            };
+
+
+            const id = row.insertCell(0);
+            const userName = row.insertCell(1);
+            const email = row.insertCell(2);
+            const role = row.insertCell(3);
+            const action = row.insertCell(4);
+
+            id.innerHTML = entry.id;
+            userName.innerHTML = entry.userName;
+            email.innerHTML = entry.email;
+            role.innerHTML = entry.role;
+
+            const editButton = document.createElement("button");
+            const textForEditButton = document.createTextNode("Edit");
+            editButton.appendChild(textForEditButton);
+            editButton.addEventListener("click", onEdit);
+            action.appendChild(editButton);
+
+            const deleteButton = document.createElement("button");
+            const textForDeleteButton = document.createTextNode("Delete");
+            deleteButton.appendChild(textForDeleteButton);
+            deleteButton.addEventListener("click", onDelete);
+            action.appendChild(deleteButton);
+
+            // userEntries.push(entry);
+            // handleStoreInLocal()
+            const data = await postapi(entry)
+            hideform1()
+        }
+        else {
+
+        }
+    }
+    else {
+
+        updateUserdata(tmpid)
+    }
+
+    return false
+
+}
+
+
+const container = document.querySelector('.container')
+blur.addEventListener('click', function () {
+    container.style.filter = "blur(8px)";
+    // container.style.pointerEvents = "none";
+    container.style.overflow = "hidden";
+
+})
+
+const hideform = document.querySelector('.bgEvents')
+createUserBtn.addEventListener('click', function () {
+    hideform.style.display = "flex";
+    firstFocusableElement.focus();
+    console.log(firstFocusableElement)
+    console.log(modal.querySelectorAll(focusableElements))
+
+    resetForm();
+})
+
+function hideform1() {
+    
+    hideform.style.display = "none";
+    container.style.filter = "blur(0px)";
+    // container.style.pointerEvents = "auto";
+    resetForm()
+    
+}
+
+
+const  focusableElements =
+    'button, [href], select, textarea, [tabindex]:not([tabindex="-1"]), input:not([class="hideinput"])';
+const modal = document.querySelector('#modal'); 
+
+const firstFocusableElement = modal.querySelectorAll(focusableElements)[0]; 
+const focusableContent = modal.querySelectorAll(focusableElements);
+const lastFocusableElement = focusableContent[focusableContent.length - 1]; 
+
+
+document.addEventListener('keydown', function(e) {
+  let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+
+  if (!isTabPressed) {
+    return;
+  }
+
+  if (e.shiftKey) {
+    if (document.activeElement === firstFocusableElement) {
+      lastFocusableElement.focus(); 
+      e.preventDefault();
+    }
+  } else { 
+    if (document.activeElement === lastFocusableElement) { 
+      firstFocusableElement.focus(); 
+      e.preventDefault();
+    }
+  }
+});
+
+
+
+
+
+cancel.addEventListener('click', function () {
+    hideform.style.display = "none";
+    container.style.filter = "blur(0px)";
+    // container.style.pointerEvents = "auto";
+
+    resetForm()
+})
+close.addEventListener('click', function () {
+    hideform.style.display = "none";
+    // container.style.pointerEvents = "auto";
+
+    container.style.filter = "blur(0px)";
+    resetForm()
+})
+
+function resetForm() {
+    document.getElementById("uid").value = "";
+    document.getElementById("userName").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("role").value = "";
+
+
+    // selectedRow = null;
+}
+
+
+export async function onLoad() {
+    // console.log("onload...");
+
+    const { data: { users } } = await getusers();
+    // console.log(users);
+    for (let i = 0; i < users.length; i++) {
         const table = document.getElementById("table");
         const row = table.insertRow(-1);
-        const entry = {
-            id: window.crypto.randomUUID(), // generate unique id for each entry
-            userName: document.getElementById("userName").value,
-            email: document.getElementById("email").value,
-            role: document.getElementById("role").value
-        };
-        
-        
-        const id = row.insertCell(0);
-        const userName = row.insertCell(1);
-        const email = row.insertCell(2);
-        const role = row.insertCell(3);
+
+        const id2 = row.insertCell(0);
+        const userName2 = row.insertCell(1);
+        const email2 = row.insertCell(2);
+        const role2 = row.insertCell(3);
         const action = row.insertCell(4);
-        
-        id.innerHTML = entry.id;
-        userName.innerHTML = entry.userName;
-        email.innerHTML = entry.email;
-        role.innerHTML = entry.role;
+
+        // console.log(users[i].id);
+        id2.innerHTML = users[i].id;
+        userName2.innerHTML = users[i].userName;
+        email2.innerHTML = users[i].email;
+        role2.innerHTML = users[i].role;
 
         const editButton = document.createElement("button");
         const textForEditButton = document.createTextNode("Edit");
@@ -49,108 +192,7 @@ document.getElementById("submit").onclick = async function (e) {
         deleteButton.appendChild(textForDeleteButton);
         deleteButton.addEventListener("click", onDelete);
         action.appendChild(deleteButton);
-        
-        // userEntries.push(entry);
-        
-        // handleStoreInLocal()
-        const data = await postapi(entry)
-        
-        // console.log(data);
-       
     }
-    else {
-        // console.log(tmpid);
-        validate() 
-        updateUserdata(tmpid)
-    }
-    // const hideFormAgain = document.querySelector('.hideform')
-    hideform.style.display = "none";
-    return false
-    
-}
-
-
-const container = document.querySelector('.container')
-blur.addEventListener('click', function () {
-    container.style.filter = "blur(8px)";
-        
-})
-
-const hideform = document.querySelector('.hideform')
-createUserBtn.addEventListener('click', function () {
-    hideform.style.display = "block";
-    resetForm();
-})
-
-// const hideFormAgain = document.querySelector('.hideform')
-btn.addEventListener('click', function () {
-    
-    hideform.style.display = "none";
-    container.style.filter = "blur(0px)";
-    resetForm()
-    // handleStoreInLocal()
-}
-
-)
-cancel.addEventListener('click', function () {
-    hideform.style.display = "none";
-    container.style.filter = "blur(0px)";
-    resetForm()
-})
-
-function resetForm(input) {
-    document.getElementById("uid").value = "";
-    document.getElementById("userName").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("role").value = "";
-    
-    const formField = input;
-
-    formField.classList.remove('success');
-    formField.classList.remove('error');
-    formField.classList.add('clear');
-    // selectedRow = null;
-}
-
-// export function handleStoreInLocal() {
-
-//     const userdata = JSON.stringify(userEntries)
-//     localStorage.setItem("userEntries", userdata)
-// }
-
-export async function onLoad() {
-    // console.log("onload...");
-
-    const {data: {users}} = await getusers();
-    // console.log(users);
-    for (let i = 0; i < users.length; i++) {
-            const table = document.getElementById("table");
-            const row = table.insertRow(-1);
-            
-            const id2 = row.insertCell(0);
-            const userName2 = row.insertCell(1);
-            const email2 = row.insertCell(2);
-            const role2 = row.insertCell(3);
-            const action = row.insertCell(4);
-
-            // console.log(users[i].id);
-            id2.innerHTML = users[i].id;
-            userName2.innerHTML = users[i].userName;
-            email2.innerHTML = users[i].email;
-            role2.innerHTML = users[i].role;
-
-            const editButton = document.createElement("button");
-            const textForEditButton = document.createTextNode("Edit");
-            editButton.appendChild(textForEditButton);
-            editButton.addEventListener("click", onEdit);
-            action.appendChild(editButton);
-    
-            const deleteButton = document.createElement("button");
-            const textForDeleteButton = document.createTextNode("Delete");
-            deleteButton.appendChild(textForDeleteButton);
-            deleteButton.addEventListener("click", onDelete);
-            action.appendChild(deleteButton);
-        }
 
     // }
 }
@@ -160,7 +202,7 @@ document.addEventListener('DOMContentLoaded', onLoad);
 const userNameEl = document.querySelector('#userName');
 const emailEl = document.querySelector('#email');
 const roleEl = document.querySelector('#role');
-const form = document.querySelector("#form1"); 
+const form = document.querySelector("#form1");
 
 
 const isRequired = value => value === '' ? false : true;
@@ -223,6 +265,7 @@ const checkRole = () => {
         showSuccess(roleEl);
         valid = true;
     }
+
     return valid;
 };
 
@@ -252,36 +295,35 @@ const showSuccess = (input) => {
     formField.classList.remove('error');
     formField.classList.add('success');
 
- }
+}
 const showSuccessMessage = (input) => {
 
     const formField = input.parentElement;
 
     const error = formField.querySelector('small');
-    error.textContent = '' ;
- }
+    error.textContent = '';
+}
 
 const validate = () => {
-    // console.log("validate called...")
+    console.log("validate called...")
 
     let isUsernameValid = checkUsername(),
         isEmailValid = checkEmail(),
-        isRoleValid = checkRole();  
+        isRoleValid = checkRole();
 
-    let isFormValid = (isUsernameValid &&
+    const isFormValid = (isUsernameValid &&
         isEmailValid &&
-        isRoleValid) ;
-       
+        isRoleValid);
 
     // submit to the server if the form is valid
-    if (isFormValid) {
-        return true   
+    if (isFormValid == true) {
+        return true
     }
-    else{
+    else {
         alert('Please enter valid details.')
-        return  false;
+
     }
-    
+
 };
 
 const debounce = (fn, delay = 500) => {
@@ -298,8 +340,22 @@ const debounce = (fn, delay = 500) => {
     };
 };
 
+const debounce2 = (fn, delay = 5000) => {
+    let timeoutId;
+    return (...args) => {
+        // cancel the previous timer
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+        // setup a new timer
+        timeoutId = setTimeout(() => {
+            fn.apply(null, args)
+        }, delay);
+    };
+};
 form.addEventListener('input', debounce(function (e) {
     switch (e.target.id) {
+
         case 'userName':
             checkUsername();
             break;
@@ -309,6 +365,10 @@ form.addEventListener('input', debounce(function (e) {
         case 'role':
             checkRole();
             break;
+
     }
+
 }));
+
+
 

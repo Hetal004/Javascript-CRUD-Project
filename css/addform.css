@@ -45,18 +45,34 @@ body{
 
 
 .hideform{
-    display: none;
-    z-index: 1;
-    position: absolute;
+    
+   pointer-events: auto;
+    position: relative;
     background-color: #EBECF0;
     width: 300px;
-    height: auto;
+    height: 450px;
     animation-name: example;
     animation-duration: 2s;
     animation-fill-mode: forwards;
     border-radius: 5px;
-    /* overflow: hidden; */
  
+}
+.bgEvents{
+    transition: opacity .15s;
+    opacity: 1;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    outline: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+
 }
 .userdetailsform{
     display: flex;
@@ -64,6 +80,7 @@ body{
     gap: 16px;
     align-items: center;
     margin-bottom: 10px;
+    padding: 4px;
   
 }
 .userdetails{
@@ -122,3 +139,10 @@ label{
 input:focus {
       box-shadow:  inset 1px 1px 2px #BABECC, inset -1px -1px 2px white;
     }
+
+.img{
+    position: absolute;
+    float : right;
+    right: 16px;
+    top: 22px;
+}

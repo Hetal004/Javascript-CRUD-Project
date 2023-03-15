@@ -35,14 +35,16 @@ body{
     
 }
 .userDetailsContainer{
-    height: 100%;
+    height: auto;
     width:100%;
     padding: 0;
     margin: 0;
 
     /* overflow: hidden; */
 }
-
+#noRecordTr{
+    display: none;
+}
 
 .hideform{
     
@@ -50,11 +52,11 @@ body{
     position: relative;
     background-color: #EBECF0;
     width: 300px;
-    height: 450px;
+    height: fit-content;
     animation-name: example;
     animation-duration: 2s;
     animation-fill-mode: forwards;
-    border-radius: 5px;
+    border-radius: 20px;
  
 }
 .bgEvents{

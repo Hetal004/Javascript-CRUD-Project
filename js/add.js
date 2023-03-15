@@ -17,7 +17,7 @@ document.getElementById("submit").onclick = async function (e) {
     let tmpid = document.getElementById("uid").value;
     // console.log(tmpid);
     if (tmpid == "") {
-
+        document.querySelector('.demo').style.display = "none";
         if (validate()) {
 
 
@@ -57,7 +57,7 @@ document.getElementById("submit").onclick = async function (e) {
             // userEntries.push(entry);
             // handleStoreInLocal()
             const data = await postapi(entry)
-            hideform1()
+            hideformbgeffects()
         }
         else {
 
@@ -91,43 +91,43 @@ createUserBtn.addEventListener('click', function () {
     resetForm();
 })
 
-function hideform1() {
-    
+function hideformbgeffects() {
+
     hideform.style.display = "none";
     container.style.filter = "blur(0px)";
     // container.style.pointerEvents = "auto";
     resetForm()
-    
+
 }
 
 
-const  focusableElements =
+const focusableElements =
     'button, [href], select, textarea, [tabindex]:not([tabindex="-1"]), input:not([class="hideinput"])';
-const modal = document.querySelector('#modal'); 
+const modal = document.querySelector('#modal');
 
-const firstFocusableElement = modal.querySelectorAll(focusableElements)[0]; 
+const firstFocusableElement = modal.querySelectorAll(focusableElements)[0];
 const focusableContent = modal.querySelectorAll(focusableElements);
-const lastFocusableElement = focusableContent[focusableContent.length - 1]; 
+const lastFocusableElement = focusableContent[focusableContent.length - 1];
 
 
-document.addEventListener('keydown', function(e) {
-  let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+document.addEventListener('keydown', function (e) {
+    let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
 
-  if (!isTabPressed) {
-    return;
-  }
-
-  if (e.shiftKey) {
-    if (document.activeElement === firstFocusableElement) {
-      lastFocusableElement.focus(); 
-      e.preventDefault();
+    if (!isTabPressed) {
+        return;
     }
-  } else { 
-    if (document.activeElement === lastFocusableElement) { 
-      firstFocusableElement.focus(); 
-      e.preventDefault();
+
+    if (e.shiftKey) {
+        if (document.activeElement === firstFocusableElement) {
+            lastFocusableElement.focus();
+            e.preventDefault();
+        }
+    } else {
+        if (document.activeElement === lastFocusableElement) {
+            firstFocusableElement.focus();
+            e.preventDefault();
+        }
     }
-  }
 });
 
 
@@ -154,8 +154,8 @@ function resetForm() {
     document.getElementById("userName").value = "";
     document.getElementById("email").value = "";
     document.getElementById("role").value = "";
-
-
+    // clearError()
+    // clearSuccess()
     // selectedRow = null;
 }
 
@@ -164,37 +164,42 @@ export async function onLoad() {
     // console.log("onload...");
 
     const { data: { users } } = await getusers();
-    // console.log(users);
-    for (let i = 0; i < users.length; i++) {
-        const table = document.getElementById("table");
-        const row = table.insertRow(-1);
 
-        const id2 = row.insertCell(0);
-        const userName2 = row.insertCell(1);
-        const email2 = row.insertCell(2);
-        const role2 = row.insertCell(3);
-        const action = row.insertCell(4);
 
-        // console.log(users[i].id);
-        id2.innerHTML = users[i].id;
-        userName2.innerHTML = users[i].userName;
-        email2.innerHTML = users[i].email;
-        role2.innerHTML = users[i].role;
+    if (users.length == 0) {
+        document.querySelector('.demo').style.display = "flex";
 
-        const editButton = document.createElement("button");
-        const textForEditButton = document.createTextNode("Edit");
-        editButton.appendChild(textForEditButton);
-        editButton.addEventListener("click", onEdit);
-        action.appendChild(editButton);
+    } else {
+        for (let i = 0; i < users.length; i++) {
+            const table = document.getElementById("table");
+            const row = table.insertRow(-1);
 
-        const deleteButton = document.createElement("button");
-        const textForDeleteButton = document.createTextNode("Delete");
-        deleteButton.appendChild(textForDeleteButton);
-        deleteButton.addEventListener("click", onDelete);
-        action.appendChild(deleteButton);
+            const id2 = row.insertCell(0);
+            const userName2 = row.insertCell(1);
+            const email2 = row.insertCell(2);
+            const role2 = row.insertCell(3);
+            const action = row.insertCell(4);
+
+            // console.log(users[i].id);
+            id2.innerHTML = users[i].id;
+            userName2.innerHTML = users[i].userName;
+            email2.innerHTML = users[i].email;
+            role2.innerHTML = users[i].role;
+
+            const editButton = document.createElement("button");
+            const textForEditButton = document.createTextNode("Edit");
+            editButton.appendChild(textForEditButton);
+            editButton.addEventListener("click", onEdit);
+            action.appendChild(editButton);
+
+            const deleteButton = document.createElement("button");
+            const textForDeleteButton = document.createTextNode("Delete");
+            deleteButton.appendChild(textForDeleteButton);
+            deleteButton.addEventListener("click", onDelete);
+            action.appendChild(deleteButton);
+        }
+
     }
-
-    // }
 }
 document.addEventListener('DOMContentLoaded', onLoad);
 
@@ -276,6 +281,18 @@ const showError = (input) => {
     formField.classList.remove('success');
     formField.classList.add('error');
 
+};
+const clearError = (input) => {
+
+    const formField = input;
+
+    formField.classList.remove('error');
+};
+const clearSuccess = (input) => {
+
+    const formField = input;
+
+    formField.classList.remove('sucess');
 };
 const showErrorMessage = (input, message) => {
 

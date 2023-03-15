@@ -14,13 +14,13 @@
 <body>
     <div class="main">
         <div class="bgEvents" id="modal" tabindex="-1" role="dialog">
-            <div class="hideform" >
+            <div class="hideform">
                 <div class="img"><img src="./images/close.png " alt="close"></div>
                 <div class="formtitle">
                     <h2>Add User</h2>
                 </div>
 
-                <form id="form1" class="userdetailsform" >
+                <form id="form1" class="userdetailsform">
                     <div class="userdetails">
                         <div class="form-field">
 
@@ -29,25 +29,25 @@
                         </div>
 
                         <div class="form-field">
-                            
+
                             <input type="text" id="userName" placeholder="User Name" />
-                            
+
                             <small id="small"></small>
                         </div>
                         <div class="form-field">
-                            
+
                             <input type="email" id="email" placeholder="Email" />
-                            
+
                             <small></small>
                         </div>
                         <div class="form-field">
-                            
+
                             <input type="text" id="role" placeholder="Role" />
-                            
-                            <small ></small>
+
+                            <small></small>
                         </div>
 
-                    
+
 
                         <div class="form-field">
 
@@ -60,6 +60,31 @@
                 </form>
             </div>
         </div>
+
+
+        <!-- this is the modal for alert box -->
+
+        <!-- <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary">OK</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- box code ended -->
+    
         <div class="container">
             <h3>CRUD Demo</h3>
             <div class="createUser">
@@ -74,11 +99,19 @@
                         <th>Role</th>
                         <th class="buttons">Action</th>
                     </tr>
+                    <!-- <tr id="noRecordTr"> 
+                        <td >No Record Found</td>                                                           
+                        <td >No Record Found</td>                              
+                             
+                    </tr> -->
                 </thead>
-                <tbody>
-
+                <tbody  >
+                  
                 </tbody>
             </table>
+            <div class="demo">
+                <div class="norecord">No record found</div>
+            </div>
         </div>
     </div>
     <script type="module" src="./js/delete.js"></script>

@@ -1,5 +1,5 @@
-import { updateUserdata, onEdit } from './edit.js';
-import {onDelete} from './delete.js';
+import { updateUserdata, onEdit, editInlineData } from './edit.js';
+import { onDelete } from './delete.js';
 import { postapi } from './createUser.js';
 import { getusers } from './getAllUsers.js';
 
@@ -11,13 +11,13 @@ const blur = document.querySelector('.button3')
 export const userEntries = [];
 
 document.getElementById("submit").onclick = async function (e) {
+    const table = document.getElementById("table");
     e.preventDefault();
     validate()
     let tmpid = document.getElementById("uid").value;
     // console.log(tmpid);
-    if (tmpid == "" ) {
+    if (tmpid == "") {
         // console.log("submit ...");
-        const table = document.getElementById("table");
         const row = table.insertRow(-1);
         const entry = {
             id: window.crypto.randomUUID(), // generate unique id for each entry
@@ -25,14 +25,13 @@ document.getElementById("submit").onclick = async function (e) {
             email: document.getElementById("email").value,
             role: document.getElementById("role").value
         };
-        
-        
+
         const id = row.insertCell(0);
         const userName = row.insertCell(1);
         const email = row.insertCell(2);
         const role = row.insertCell(3);
         const action = row.insertCell(4);
-        
+
         id.innerHTML = entry.id;
         userName.innerHTML = entry.userName;
         email.innerHTML = entry.email;
@@ -49,31 +48,32 @@ document.getElementById("submit").onclick = async function (e) {
         deleteButton.appendChild(textForDeleteButton);
         deleteButton.addEventListener("click", onDelete);
         action.appendChild(deleteButton);
-        
-        // userEntries.push(entry);
-        
+
         // handleStoreInLocal()
         const data = await postapi(entry)
-        
+
         // console.log(data);
-       
+
     }
     else {
         // console.log(tmpid);
-        validate() 
+        validate()
         updateUserdata(tmpid)
     }
-    // const hideFormAgain = document.querySelector('.hideform')
-    hideform.style.display = "none";
+    // Inline editing of Table Data
+    const cells = table.getElementsByTagName('td');
+    for (var i = 1; i < cells.length; i++) {
+        cells[i].addEventListener("dblclick", editInlineData);
+    }
     return false
-    
 }
+
 
 
 const container = document.querySelector('.container')
 blur.addEventListener('click', function () {
     container.style.filter = "blur(8px)";
-        
+
 })
 
 const hideform = document.querySelector('.hideform')
@@ -84,7 +84,7 @@ createUserBtn.addEventListener('click', function () {
 
 // const hideFormAgain = document.querySelector('.hideform')
 btn.addEventListener('click', function () {
-    
+
     hideform.style.display = "none";
     container.style.filter = "blur(0px)";
     resetForm()
@@ -98,18 +98,11 @@ cancel.addEventListener('click', function () {
     resetForm()
 })
 
-function resetForm(input) {
+function resetForm() {
     document.getElementById("uid").value = "";
     document.getElementById("userName").value = "";
     document.getElementById("email").value = "";
     document.getElementById("role").value = "";
-    
-    const formField = input;
-
-    formField.classList.remove('success');
-    formField.classList.remove('error');
-    formField.classList.add('clear');
-    // selectedRow = null;
 }
 
 // export function handleStoreInLocal() {
@@ -118,40 +111,48 @@ function resetForm(input) {
 //     localStorage.setItem("userEntries", userdata)
 // }
 
+
 export async function onLoad() {
-    // console.log("onload...");
 
-    const {data: {users}} = await getusers();
+    const { data: { users } } = await getusers();
     // console.log(users);
+    const table = document.getElementById("table");
     for (let i = 0; i < users.length; i++) {
-            const table = document.getElementById("table");
-            const row = table.insertRow(-1);
-            
-            const id2 = row.insertCell(0);
-            const userName2 = row.insertCell(1);
-            const email2 = row.insertCell(2);
-            const role2 = row.insertCell(3);
-            const action = row.insertCell(4);
+        const row = table.insertRow(-1);
 
-            // console.log(users[i].id);
-            id2.innerHTML = users[i].id;
-            userName2.innerHTML = users[i].userName;
-            email2.innerHTML = users[i].email;
-            role2.innerHTML = users[i].role;
+        const id2 = row.insertCell(0);
+        const userName2 = row.insertCell(1);
+        const email2 = row.insertCell(2);
+        const role2 = row.insertCell(3);
+        const action = row.insertCell(4);
 
-            const editButton = document.createElement("button");
-            const textForEditButton = document.createTextNode("Edit");
-            editButton.appendChild(textForEditButton);
-            editButton.addEventListener("click", onEdit);
-            action.appendChild(editButton);
-    
-            const deleteButton = document.createElement("button");
-            const textForDeleteButton = document.createTextNode("Delete");
-            deleteButton.appendChild(textForDeleteButton);
-            deleteButton.addEventListener("click", onDelete);
-            action.appendChild(deleteButton);
-        }
+        // console.log(users[i].id);
+        id2.innerHTML = users[i].id;
+        userName2.innerHTML = users[i].userName;
+        email2.innerHTML = users[i].email;
+        role2.innerHTML = users[i].role;
 
+        const editButton = document.createElement("button");
+        const textForEditButton = document.createTextNode("Edit");
+        editButton.appendChild(textForEditButton);
+        editButton.addEventListener("click", onEdit);
+        action.appendChild(editButton);
+
+        const deleteButton = document.createElement("button");
+        const textForDeleteButton = document.createTextNode("Delete");
+        deleteButton.appendChild(textForDeleteButton);
+        deleteButton.addEventListener("click", onDelete);
+        action.appendChild(deleteButton);
+
+        // console.log(row)
+        // row.addEventListener("dblclick", editableTable);
+    }
+
+    // Inline editing of Table Data
+    const cells = table.getElementsByTagName('td');
+    for (var i = 1; i < cells.length; i++) {
+        cells[i].addEventListener("dblclick", editInlineData);
+    }
     // }
 }
 document.addEventListener('DOMContentLoaded', onLoad);
@@ -160,7 +161,8 @@ document.addEventListener('DOMContentLoaded', onLoad);
 const userNameEl = document.querySelector('#userName');
 const emailEl = document.querySelector('#email');
 const roleEl = document.querySelector('#role');
-const form = document.querySelector("#form1"); 
+const form = document.querySelector("#form1");
+const table5 = document.querySelector("#table");
 
 
 const isRequired = value => value === '' ? false : true;
@@ -252,36 +254,36 @@ const showSuccess = (input) => {
     formField.classList.remove('error');
     formField.classList.add('success');
 
- }
+}
 const showSuccessMessage = (input) => {
 
     const formField = input.parentElement;
 
     const error = formField.querySelector('small');
-    error.textContent = '' ;
- }
+    error.textContent = '';
+}
 
-const validate = () => {
+export const validate = () => {
     // console.log("validate called...")
 
     let isUsernameValid = checkUsername(),
         isEmailValid = checkEmail(),
-        isRoleValid = checkRole();  
+        isRoleValid = checkRole();
 
     let isFormValid = (isUsernameValid &&
         isEmailValid &&
-        isRoleValid) ;
-       
+        isRoleValid);
 
     // submit to the server if the form is valid
+    console.log(isFormValid);
     if (isFormValid) {
-        return true   
+        return true
     }
-    else{
+    else {
         alert('Please enter valid details.')
-        return  false;
+        return false;
     }
-    
+
 };
 
 const debounce = (fn, delay = 500) => {

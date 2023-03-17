@@ -1,8 +1,8 @@
-body{
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+body {
     height: 100vh;
     padding: 0;
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .main {
@@ -15,9 +15,14 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: large;
 }
-.login-bg{
-    background-color: #EBECF0;;
+
+.login-bg {
+    background-color: #EBECF0;
+    ;
     border-radius: 20px;
     height: auto;
     width: 330px;
@@ -35,7 +40,7 @@ body{
 }
 
 .createUser {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 h3 {
@@ -48,9 +53,10 @@ h3 {
     border: 2px solid black;
     padding: 8px;
     border-collapse: collapse;
-   
+
 }
-thead{
+
+thead {
     overflow-y: scroll;
 }
 
@@ -85,7 +91,8 @@ th {
 }
 
 tr th:first-child,
-tr td:first-child, #uid {
+tr td:first-child,
+#uid {
     display: none;
 }
 
@@ -99,87 +106,114 @@ tr td:first-child, #uid {
     cursor: pointer;
     padding: 10px;
     border-radius: 10px;
-    background-color: #4fb9e7ba;
+    color: #ffffff;
+    background-color: #4fb9e7;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: medium;
+}
+
+.btn:hover {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+    color: #000;
+    background-color: #a9d9f8;
 }
 
 .button3 {
     float: right;
 }
-.success{
+
+.success {
     border: .2px solid;
     border-color: green;
 }
-.error{
+
+.error {
     border: .2px solid;
     border-color: red;
 }
-.clear{
+
+.clear {
     border: none;
     border-color: none;
 }
-.modal-content{display: flex;
--webkit-box-orient: vertical;
--webkit-box-direction: normal;
--ms-flex-direction: column;
-flex-direction: column;
-width: 100%;
 
-pointer-events: auto;
-background-color: #fff;
-background-clip: padding-box;
-border: 1px solid rgba(0,0,0,.2);
-border-radius: 0.3rem;
+.alert-content {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: aliceblue;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: 0.3rem;
 
 }
-.modal-dialog{
+.alert {
+    display: none;
+}
+
+.alert-dialog {
     width: 500px;
     height: auto;
     max-width: 500px;
     margin: 1.75rem auto;
-
 }
-.modal-header{
+
+.alert-header {
     display: flex;
-    
+
     align-items: flex-start;
-  
+
     justify-content: space-between;
     padding: 1rem;
     border-bottom: 1px solid #e9ecef;
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
 }
-.close{
+
+.close {
+    border-radius: 5px;
+    background: #000;
     float: right;
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
-    color: #000;
+    color: #fff;
     text-shadow: 0 1px 0 #fff;
     opacity: .5;
 }
-.modal-title {
+
+.alert-title {
     margin-bottom: 0;
     line-height: 1.5;
-    font-weight: 500; 
+    font-weight: 500;
 }
-.modal-body {
+
+.alert-body {
     position: relative;
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1rem;
 }
-.modal-footer {
+
+.alert-footer {
 
     display: flex;
-    gap:4px;
+    gap: 14px;
     align-items: center;
     justify-content: flex-end;
     padding: 1rem;
     border-top: 1px solid #e9ecef;
 }
-.demo{
+
+.demo {
     position: relative;
     background-color: #4fb9e7;
     display: none;
@@ -187,7 +221,8 @@ border-radius: 0.3rem;
     align-items: center;
     padding: 35px;
 }
-.norecord{
+
+.norecord {
     position: relative;
     background-color: aliceblue;
     display: flex;
@@ -195,4 +230,55 @@ border-radius: 0.3rem;
     align-items: center;
     width: 90%;
     padding: 20px;
+}
+
+#edit:hover {
+   cursor: pointer;
+   color: #4fb9e7;
+}
+
+#delete:hover {
+   cursor: pointer;
+   color: #e7544f;
+}
+
+#delete{
+    padding-left: 20px;
+}
+
+#edit, #delete{
+    height: 12px;
+    width: 12px;
+}
+
+/* Implementing Toast */
+.toast {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    transform: translateY(100%);
+    opacity: 0;
+
+    transition:
+        opacity 500ms,
+        transform 500ms;
+}
+
+.toast.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-body {
+    margin: 28px;
+    padding: 20px 24px;
+
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: large;
+
+    background-color: lightskyblue;
+    color: darkblue;
+    border-radius: 4px;
 }

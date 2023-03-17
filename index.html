@@ -6,13 +6,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/toast.css">
     <link rel="stylesheet" href="./css/addform.css" class="src">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>JS Project</title>
 
 </head>
 
 <body>
     <div class="main">
+
+        <!-- this is the modal for alert box -->
+
+        <div class="alert alertblur" tabindex="-1" role="dialog">
+            <div class="alert-dialog" role="document">
+                <div class="alert-content">
+                    <div class="alert-header">
+                        <h3 class="alert-title">Alert</h3>
+                        <button type="button" class="close cancelAlert" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="alert-footer">
+                        <button type="button" id="okbtn" class="btn btn-primary">OK</button>
+                        <button type="button" class="btn btn-secondary cancelAlert" data-dismiss="alert">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- box code ended -->
+
+
         <div class="bgEvents" id="modal" tabindex="-1" role="dialog">
             <div class="hideform">
                 <div class="img"><img src="./images/close.png " alt="close"></div>
@@ -47,8 +74,6 @@
                             <small></small>
                         </div>
 
-
-
                         <div class="form-field">
 
                             <input type="button" class="button" id="submit" value="Submit">
@@ -61,29 +86,6 @@
             </div>
         </div>
 
-
-        <!-- this is the modal for alert box -->
-
-        <!-- <div class="modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Modal body text goes here.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">OK</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- box code ended -->
     
         <div class="container">
             <h3>CRUD Demo</h3>
@@ -99,20 +101,35 @@
                         <th>Role</th>
                         <th class="buttons">Action</th>
                     </tr>
+                    
                     <!-- <tr id="noRecordTr"> 
                         <td >No Record Found</td>                                                           
                         <td >No Record Found</td>                              
                              
                     </tr> -->
                 </thead>
-                <tbody  >
-                  
+                <tbody>
+                  <!-- <tr>
+                        <td></td>
+                        <td>ronit</td>
+                        <td>ronyo</td>
+                        <td>dev</td>
+                        <td class="buttons">
+                            <i onclick="onEdit()" id="edit" class="fas fa-edit"></i> <i onclick="onDelete()" id="delete" class="fa fa-trash"></i>
+                        </td>
+                    </tr> -->
                 </tbody>
             </table>
             <div class="demo">
                 <div class="norecord">No record found</div>
+            </div>    
+        </div>
+
+        <div class="toast" id="toast">
+            <div class="toast-body">
             </div>
         </div>
+
     </div>
     <script type="module" src="./js/delete.js"></script>
     <script type="module" src="./js/edit.js"></script>

@@ -41,21 +41,12 @@ document.getElementById("submit").onclick = async function (e) {
             userName.innerHTML = entry.userName;
             email.innerHTML = entry.email;
             role.innerHTML = entry.role;
-
-            const editButton = document.createElement("button");
-            const textForEditButton = document.createTextNode("Edit");
-            editButton.appendChild(textForEditButton);
-            editButton.addEventListener("click", onEdit);
-            action.appendChild(editButton);
-
-            const deleteButton = document.createElement("button");
-            const textForDeleteButton = document.createTextNode("Delete");
-            deleteButton.appendChild(textForDeleteButton);
-            deleteButton.addEventListener("click", onDelete);
-            action.appendChild(deleteButton);
-
-            // userEntries.push(entry);
-            // handleStoreInLocal()
+            
+            const icon = `<i id="edit" class="fas fa-edit"></i> <i id="delete" class="fa fa-trash"></i>`;
+            action.insertAdjacentHTML('afterbegin',icon);
+            document.getElementById("edit").addEventListener("click", onEdit);
+            document.getElementById("delete").addEventListener("click", onDelete);
+           
             const data = await postapi(entry)
             hideformbgeffects()
         }
@@ -74,12 +65,13 @@ document.getElementById("submit").onclick = async function (e) {
 
 
 const container = document.querySelector('.container')
-blur.addEventListener('click', function () {
+blur.addEventListener('click', blurevent);
+
+export function blurevent() {
     container.style.filter = "blur(8px)";
     // container.style.pointerEvents = "none";
     container.style.overflow = "hidden";
-
-})
+}
 
 const hideform = document.querySelector('.bgEvents')
 createUserBtn.addEventListener('click', function () {
@@ -99,7 +91,6 @@ function hideformbgeffects() {
     resetForm()
 
 }
-
 
 const focusableElements =
     'button, [href], select, textarea, [tabindex]:not([tabindex="-1"]), input:not([class="hideinput"])';
@@ -186,17 +177,11 @@ export async function onLoad() {
             email2.innerHTML = users[i].email;
             role2.innerHTML = users[i].role;
 
-            const editButton = document.createElement("button");
-            const textForEditButton = document.createTextNode("Edit");
-            editButton.appendChild(textForEditButton);
-            editButton.addEventListener("click", onEdit);
-            action.appendChild(editButton);
-
-            const deleteButton = document.createElement("button");
-            const textForDeleteButton = document.createTextNode("Delete");
-            deleteButton.appendChild(textForDeleteButton);
-            deleteButton.addEventListener("click", onDelete);
-            action.appendChild(deleteButton);
+            // for loop, pass i on id and this in the onclick of eventlistener
+            const icon = `<i id="edit" class="fas fa-edit"></i> <i id="delete" class="fa fa-trash"></i> <i class="fa-regular fa-circle-check"></i>`;
+            action.insertAdjacentHTML('afterbegin',icon);
+            document.getElementById("edit").addEventListener("click", onEdit);
+            document.getElementById("delete").addEventListener("click", onDelete);
         }
 
     }
@@ -336,14 +321,10 @@ const validate = () => {
     if (isFormValid == true) {
         return true
     }
-    else {
-        alert('Please enter valid details.')
-
-    }
-
+    
 };
 
-const debounce = (fn, delay = 500) => {
+export const debounce = (fn, delay = 500) => {
     let timeoutId;
     return (...args) => {
         // cancel the previous timer
@@ -357,19 +338,6 @@ const debounce = (fn, delay = 500) => {
     };
 };
 
-const debounce2 = (fn, delay = 5000) => {
-    let timeoutId;
-    return (...args) => {
-        // cancel the previous timer
-        if (timeoutId) {
-            clearTimeout(timeoutId);
-        }
-        // setup a new timer
-        timeoutId = setTimeout(() => {
-            fn.apply(null, args)
-        }, delay);
-    };
-};
 form.addEventListener('input', debounce(function (e) {
     switch (e.target.id) {
 

@@ -1,9 +1,21 @@
 import { onLoad } from "./add.js";
+import { removeBlurEffect, alertprompt } from "./delete.js";
 import { getapi } from "./getUserById.js";
 import { updateData } from "./updateUserById.js";
 
-export async function onEdit() {
-    if (confirm('Are you sure to edit this record ?')) {
+
+const alertbox = document.querySelector('.alert')
+const confirm1 = document.querySelector('#okbtn')
+const alertbody = document.querySelector('.alert-body')
+
+export function onEdit() {
+    alertprompt();
+    alertbody.innerHTML = 'Are you sure you want to edit this record ?'; 
+    confirm1.addEventListener('click', setData);
+
+    async function setData() {
+        removeBlurEffect()
+        alertbox.style.display = "none";
         const hideform = document.querySelector('.hideform')
         const selectedRow = this.parentElement.parentElement;
         console.log(selectedRow);
@@ -26,12 +38,12 @@ export async function onEdit() {
 }
 
 export async function updateUserdata(tmpid) {
-            const entry = {
-                userName: document.getElementById("userName").value,
-                email: document.getElementById("email").value,
-                role: document.getElementById("role").value
-            };
-            const data = await updateData(tmpid, entry);
+    const entry = {
+        userName: document.getElementById("userName").value,
+        email: document.getElementById("email").value,
+        role: document.getElementById("role").value
+    };
+    const data = await updateData(tmpid, entry);
 
     const table = document.getElementById("table");
     for (var i = 1; i < table.rows.length;) {

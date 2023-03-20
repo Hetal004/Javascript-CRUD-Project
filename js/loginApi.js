@@ -1,4 +1,4 @@
-async function getToken(entry) {
+export async function getToken(entry) {
   try {
     console.log("getToken called..........", entry);
 
@@ -10,26 +10,46 @@ async function getToken(entry) {
       },
     });
     const data = await res.json();
-    console.info("data", data);
+
+    if (!!data.token) {
+      window.location = "index.html";
+      setCookie("Validtime", data.token, 1);
+      
+      // setTimeout(function(){
+      //   window.location = "http://127.0.0.1:5500/login.html";
+      // }, 1 * 60 * 1000);
+
+
+    
+    } else {
+      alert("Invalid credentials.");
+    }
   } catch (error) {
-    console.info(error);
+    alert("Please try after sometime.");
+    return false;
   }
 }
 
+function setCookie(c_name, value, exminute) {
+  let extime = new Date();
+  console.log(extime);
+  extime.setMinutes(extime.getMinutes() + exminute);
+  console.log(exminute);
 
-const login = document.querySelector("#login");
-login.addEventListener("click", async function () {
-  const entry = {
-    username: document.getElementById("userName").value,
-    password: document.getElementById("password").value,
-  };
-  console.log(entry);
-  const authentication = await getToken(entry);
-  console.info(authentication); 
+  const c_value =
+    encodeURI(value) +
+    (exminute == null ? "" : "; expires=" + extime.toUTCString());
+  document.cookie = c_name + "=" + c_value;
+}
 
-    if (authentication == true) {
-      window.location = "index.html";
-    } else{
-      alert('Invalid Username or password..')
-    }
-});
+export function getCookie(c_name) {
+  const nameEQ = c_name + "=";
+  let ca = document.cookie.split(";");
+
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == " ") c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}

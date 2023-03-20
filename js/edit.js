@@ -4,12 +4,15 @@ import { updateData } from "./updateUserById.js";
 
 export async function onEdit() {
     if (confirm('Are you sure to edit this record ?')) {
-        const hideform = document.querySelector('.hideform')
+        const hideform = document.querySelector('.bgEvents')
+        const container = document.querySelector(".container");
+
         const selectedRow = this.parentElement.parentElement;
         console.log(selectedRow);
 
-        hideform.style.display = "block";
-
+        hideform.style.display = "flex";
+        container.style.filter = "blur(8px)";
+        
         let form = document.getElementById('form1');
         const rowId = selectedRow.cells[0].innerHTML;
         console.log(rowId);

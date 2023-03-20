@@ -3,6 +3,7 @@
 import { deleteapi } from "./deleteuserAPI.js";
 
 export async function onDelete() {
+    
     if (confirm('Are you sure to delete this record ?')) {
 
         const row = this.parentElement.parentElement;

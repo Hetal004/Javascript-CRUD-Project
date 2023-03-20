@@ -1,10 +1,14 @@
+import { getCookie } from "./loginApi.js";
 export async function deleteapi(id){
+    const token = getCookie("Validtime");
+
     const url = "http://192.168.1.123:3000/users/" + id ;
 try {
 const deleteMethod = {
     method: 'DELETE', 
     headers: {
-     'Content-type': 'application/json; charset=UTF-8' 
+     'Content-type': 'application/json; charset=UTF-8',
+     'authorization': `Bearer ${token}`, 
     },
     
    }

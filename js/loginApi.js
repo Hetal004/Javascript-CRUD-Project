@@ -19,8 +19,6 @@ export async function getToken(entry) {
       //   window.location = "http://127.0.0.1:5500/login.html";
       // }, 1 * 60 * 1000);
 
-
-    
     } else {
       alert("Invalid credentials.");
     }
@@ -28,7 +26,9 @@ export async function getToken(entry) {
     alert("Please try after sometime.");
     return false;
   }
+
 }
+
 
 function setCookie(c_name, value, exminute) {
   let extime = new Date();
@@ -52,4 +52,11 @@ export function getCookie(c_name) {
     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
   }
   return null;
+}
+
+const token = getCookie("Validtime");
+export function load(){
+  if(token === null){
+    window.location="login.html";
+  }
 }

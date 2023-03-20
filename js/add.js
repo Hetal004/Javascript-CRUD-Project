@@ -2,7 +2,7 @@ import { updateUserdata, onEdit } from "./edit.js";
 import { onDelete } from "./delete.js";
 import { postapi } from "./createUser.js";
 import { getusers } from "./getAllUsers.js";
-import { getCookie } from "./loginApi.js";
+import { getCookie , load} from "./loginApi.js";
 
 const createUserBtn = document.querySelector(".button3");
 const btn = document.querySelector(".button");
@@ -152,7 +152,7 @@ function resetForm() {
 
 export async function onLoad() {
   // console.log("onload...");
- 
+ load()
 const{data:{users}}= await getusers();
 
   if (users.length == 0) {

@@ -56,17 +56,22 @@ document.getElementById("submit").onclick = async function (e) {
 
     }
     else {
-        // console.log(tmpid);
         validate()
         updateUserdata(tmpid)
     }
     // Inline editing of Table Data
     const cells = table.getElementsByTagName('td');
     for (var i = 1; i < cells.length; i++) {
-        cells[i].addEventListener("dblclick", editInlineData);
+        if(i==4) {
+            console.log("Buttons are not editable...");
+        }
+        else {
+            cells[i].addEventListener("dblclick", editInlineData);
+        }
     }
     return false
 }
+
 
 
 
@@ -144,8 +149,6 @@ export async function onLoad() {
         deleteButton.addEventListener("click", onDelete);
         action.appendChild(deleteButton);
 
-        // console.log(row)
-        // row.addEventListener("dblclick", editableTable);
     }
 
     // Inline editing of Table Data
@@ -153,7 +156,7 @@ export async function onLoad() {
     for (var i = 1; i < cells.length; i++) {
         cells[i].addEventListener("dblclick", editInlineData);
     }
-    // }
+   
 }
 document.addEventListener('DOMContentLoaded', onLoad);
 
@@ -162,7 +165,6 @@ const userNameEl = document.querySelector('#userName');
 const emailEl = document.querySelector('#email');
 const roleEl = document.querySelector('#role');
 const form = document.querySelector("#form1");
-const table5 = document.querySelector("#table");
 
 
 const isRequired = value => value === '' ? false : true;

@@ -96,7 +96,6 @@ export function editInlineData() {
             };
 
             if (entry.userName != "" && entry.email != "" && entry.role != "") {
-                alert('Valid detail.');
                 const data = await updateInlineData(tmpid, entry);
             }
             else {
@@ -105,11 +104,7 @@ export function editInlineData() {
             }
      
     }
-    // input.onclick = function () {
-    //     this.blur();
-    //     console.log('blur event called...')
-    // }
-
+    
     this.innerHTML = "";
     this.style.cssText = 'padding : 10px';
     this.append(input);

@@ -1,8 +1,8 @@
-import { updateUserdata, onEdit } from "./edit.js";
+import { updateUserdata, onEdit, editInlineData } from "./edit.js";
 import { onDelete } from "./delete.js";
 import { postapi } from "./createUser.js";
 import { getusers } from "./getAllUsers.js";
-import { getCookie , load} from "./loginApi.js";
+import { getCookie, load } from "./loginApi.js";
 
 const createUserBtn = document.querySelector(".button3");
 const btn = document.querySelector(".button");
@@ -10,17 +10,17 @@ const cancel = document.querySelector(".button5");
 const close = document.querySelector(".img");
 const blur = document.querySelector(".button3");
 
+const table = document.getElementById("table");
 export const userEntries = [];
 
 document.getElementById("submit").onclick = async function (e) {
   e.preventDefault();
 
   let tmpid = document.getElementById("uid").value;
-  // console.log(tmpid);
+
   if (tmpid == "") {
     document.querySelector(".demo").style.display = "none";
     if (validate()) {
-      const table = document.getElementById("table");
       const row = table.insertRow(-1);
       const entry = {
         id: window.crypto.randomUUID(), // generate unique id for each entry
@@ -63,6 +63,18 @@ document.getElementById("submit").onclick = async function (e) {
     hideformbgeffects();
   }
 
+   // Inline editing of Table Data
+   const cells = table.getElementsByTagName('td');
+   for (let i = 0; i < cells.length; i++) {
+       if (cells[i].cellIndex == 4) {
+         cells[i].addEventListener("dblclick", function() {
+             console.log("Buttons are not editable...");
+         });
+       }
+       else {    
+         cells[i].addEventListener("dblclick", editInlineData);
+       }
+   }
   return false;
 };
 
@@ -78,16 +90,16 @@ const cookieValue = getCookie("Validtime");
 console.log(cookieValue);
 
 if (cookieValue != null) {
-    createUserBtn.addEventListener("click", function () {
-      hideform.style.display = "flex";
-      firstFocusableElement.focus();
-      console.log(firstFocusableElement);
-      console.log(modal.querySelectorAll(focusableElements));
-  
-      resetForm();
-    });
+  createUserBtn.addEventListener("click", function () {
+    hideform.style.display = "flex";
+    firstFocusableElement.focus();
+    console.log(firstFocusableElement);
+    console.log(modal.querySelectorAll(focusableElements));
+
+    resetForm();
+  });
 } else {
-    createUserBtn.style.disabled = true;
+  createUserBtn.style.disabled = true;
 }
 
 function hideformbgeffects() {
@@ -152,8 +164,8 @@ function resetForm() {
 
 export async function onLoad() {
   // console.log("onload...");
- load()
-const{data:{users}}= await getusers();
+  load()
+  const { data: { users } } = await getusers();
 
   if (users.length == 0) {
     document.querySelector(".demo").style.display = "flex";
@@ -185,9 +197,24 @@ const{data:{users}}= await getusers();
       deleteButton.appendChild(textForDeleteButton);
       deleteButton.addEventListener("click", onDelete);
       action.appendChild(deleteButton);
+
     }
+
+  }
+  // Inline editing of Table Data
+  const cells = table.getElementsByTagName('td');
+  for (let i = 0; i < cells.length; i++) {
+      if (cells[i].cellIndex == 4) {
+        cells[i].addEventListener("dblclick", function() {
+            console.log("Buttons are not editable...");
+        });
+      }
+      else {    
+        cells[i].addEventListener("dblclick", editInlineData);
+      }
   }
 }
+
 document.addEventListener("DOMContentLoaded", onLoad);
 
 const userNameEl = document.querySelector("#userName");
@@ -294,25 +321,35 @@ const showSuccess = (input) => {
   formField.classList.add("success");
 };
 const showSuccessMessage = (input) => {
+
+
   const formField = input.parentElement;
 
-  const error = formField.querySelector("small");
-  error.textContent = "";
-};
+  const error = formField.querySelector('small');
+  error.textContent = '';
+}
 
-const validate = () => {
+export const validate = () => {
+  // console.log("validate called...")
+
   let isUsernameValid = checkUsername(),
     isEmailValid = checkEmail(),
     isRoleValid = checkRole();
 
-  const isFormValid = isUsernameValid && isEmailValid && isRoleValid;
+  let isFormValid = (isUsernameValid &&
+    isEmailValid &&
+    isRoleValid);
 
   // submit to the server if the form is valid
-  if (isFormValid == true) {
-    return true;
-  } else {
-    alert("Please enter valid details.");
+  console.log(isFormValid);
+  if (isFormValid) {
+    return true
   }
+  else {
+    alert('Please enter valid details.')
+    return false;
+  }
+
 };
 
 const debounce = (fn, delay = 500) => {

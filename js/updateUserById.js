@@ -5,7 +5,7 @@ export async function updateData(id, entry) {
     try {
         const response = await fetch(updateUserByIdUrl, {
             method: 'PUT',
-            body:JSON.stringify({user: entry}),
+            body:JSON.stringify({ user : entry}),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8',
                 'authorization': `Bearer ${token}`,

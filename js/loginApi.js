@@ -2,7 +2,7 @@ export async function getToken(entry) {
   try {
     console.log("getToken called..........", entry);
 
-    const res = await fetch("http://192.168.1.123:3000/login", {
+    const res = await fetch("https://js-server2.onrender.com/login", {
       method: "POST",
       body: JSON.stringify(entry),
       headers: {

@@ -1,7 +1,7 @@
 import { getCookie } from "./loginApi.js";
 export async function updateData(id, entry) {
     const token = getCookie("Validtime");
-    const updateUserByIdUrl = "http://192.168.1.123:3000/users/" + id ;
+    const updateUserByIdUrl = "https://js-server2.onrender.com/users/" + id ;
     try {
         const response = await fetch(updateUserByIdUrl, {
             method: 'PUT',

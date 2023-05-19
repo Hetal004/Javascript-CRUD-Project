@@ -3,7 +3,7 @@ import { getCookie } from "./loginApi.js";
 export async function getapi(id) {
     const token = getCookie("Validtime");
 
-    const getUserByIdUrl = "http://192.168.1.123:3000/users/" + id ;
+    const getUserByIdUrl = "http://localhost:3000/users/" + id ;
     try {const response = await fetch(getUserByIdUrl,{
         headers: {
             'authorization': `Bearer ${token}`,

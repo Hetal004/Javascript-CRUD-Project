@@ -1,7 +1,7 @@
 import { getCookie } from "./loginApi.js";
 export async function postapi(entry) {
     const token = getCookie("Validtime");
-    const url = "http://localhost:3000/users"
+    const url = "https://js-server2.onrender.com/users"
     console.log(entry)
     try {
         

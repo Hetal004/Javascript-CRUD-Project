@@ -2,7 +2,7 @@ import { getCookie } from "./loginApi.js";
 export async function deleteapi(id){
     const token = getCookie("Validtime");
 
-    const url = "http://localhost:3000/users/" + id ;
+    const url = "https://js-server2.onrender.com/users/" + id ;
 try {
 const deleteMethod = {
     method: 'DELETE', 

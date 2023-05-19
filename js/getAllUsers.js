@@ -2,7 +2,7 @@ import { getCookie } from "./loginApi.js";
 
 export async function getusers() {
    const token = getCookie("Validtime");
-    const getUsers = "http://localhost:3000/users";
+    const getUsers = "https://js-server2.onrender.com/users";
     try {
       const response = await fetch(getUsers, {
         headers: {

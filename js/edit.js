@@ -1,39 +1,44 @@
 import { onLoad } from "./add.js";
 import { removeBlurEffect, alertprompt } from "./delete.js";
 import { getapi } from "./getUserById.js";
-import { updateData } from "./updateUserById.js";
+import { updateData} from "./updateUserById.js";
 
 
 const alertbox = document.querySelector('.alert')
-const confirm1 = document.querySelector('#okbtn')
+const confirm1 = document.querySelector('.okbtn1')
 const alertbody = document.querySelector('.alert-body')
 
-export function onEdit() {
+export async function onEdit() {
     alertprompt();
     alertbody.innerHTML = 'Are you sure you want to edit this record ?'; 
-    confirm1.addEventListener('click', setData);
+    const selectedRow = this.parentElement.parentElement;
+    let form = document.getElementById('form1');
+    const rowId = selectedRow.cells[0].innerHTML;
+    console.log(rowId)
 
-    async function setData() {
+    const { data: { id, userName, email, role } } = await getapi(rowId);
+    if (rowId === id) {
+        form.uid.value = id;
+        form.userName.value = userName;
+        form.email.value = email;
+        form.role.value = role;
+        document.querySelector(".formtitle h2").innerHTML = 'Update User';
+    }
+
+    confirm1.addEventListener('click', setFormEffect);
+
+    async function setFormEffect() {
         removeBlurEffect()
         alertbox.style.display = "none";
-        const hideform = document.querySelector('.hideform')
-        const selectedRow = this.parentElement.parentElement;
-        console.log(selectedRow);
+        // const hideform = document.querySelector('.hideform')
 
-        hideform.style.display = "block";
+        const hideform = document.querySelector('.bgEvents')
+        const container = document.querySelector(".container");
+        console.log(selectedRow)
 
-        let form = document.getElementById('form1');
-        const rowId = selectedRow.cells[0].innerHTML;
-        console.log(rowId);
-
-        const { data: { id, userName, email, role } } = await getapi(rowId);
-        if (rowId === id) {
-            form.uid.value = id;
-            form.userName.value = userName;
-            form.email.value = email;
-            form.role.value = role;
-            document.querySelector(".formtitle h2").innerHTML = 'Update User';
-        }
+        hideform.style.display = "flex";
+        container.style.filter = "blur(8px)";
+        
     }
 }
 
@@ -50,4 +55,72 @@ export async function updateUserdata(tmpid) {
         table.deleteRow(i);
     }
     onLoad();
+}
+
+export function editInlineData() {
+    if (this.hasAttribute('data-clicked')) {
+        return;
+    }
+
+    this.setAttribute('data-clicked', 'yes');
+    this.setAttribute('data-text', this.innerHTML);
+
+    let input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.value = this.innerHTML;
+    input.style.width = this.offsetWidth - (this.clientLeft * 2) + "px";
+    input.style.height = this.offsetHeight;
+    input.style.border = "0px";
+    input.style.fontFamily = "inherit";
+    input.style.fontSize = "inherit";
+    input.style.textAlign = "inherit";
+    input.style.backgroundColor = "#a9d9f8";
+
+    input.onblur = async function () {
+            let td = input.parentElement;
+            let orig_text = input.parentElement.getAttribute('data-text');
+            let curr_text = this.value;
+            const parentrow = input.parentElement.parentElement;
+            const id = parentrow.firstChild;
+            const userName = id.nextSibling;
+            const email = userName.nextSibling;
+            const role = email.nextSibling;
+            const tmpid = parentrow.firstChild.innerHTML;
+
+            if (orig_text != curr_text) {
+                td.removeAttribute('data-clicked');
+                td.removeAttribute('data-text');
+                td.innerHTML = curr_text;
+                td.style.cssText = 'padding : 10px';
+                console.log(orig_text + ' is changed to ' + curr_text);
+            }
+            else {
+                td.removeAttribute('data-clicked');
+                td.removeAttribute('data-text');
+                td.innerHTML = curr_text;
+                td.style.cssText = 'padding : 10px';
+                console.log('No change in data !!');
+            }
+
+            // save the data 
+            const entry = {
+                userName: userName.innerHTML,
+                email: email.innerHTML,
+                role: role.innerHTML
+            };
+
+            if (entry.userName != "" && entry.email != "" && entry.role != "") {
+                const data = await updateData(tmpid, entry);
+            }
+            else {
+                td.innerHTML = orig_text;
+                alert('Field should not be kept empty!');
+            }
+     
+    }
+    
+    this.innerHTML = "";
+    this.style.cssText = 'padding : 10px';
+    this.append(input);
+    this.firstElementChild.select();
 }

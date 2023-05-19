@@ -1,10 +1,10 @@
 import { deleteapi } from "./deleteuserAPI.js";
-import { blurevent, debounce } from "./add.js";
+import { blurevent } from "./add.js";
 
 const alertbox = document.querySelector('.alert')
 const cancel = document.querySelectorAll('.cancelAlert')
 const container = document.querySelector('.container')
-const confirm2 = document.querySelector('#okbtn')
+const confirm2 = document.querySelector('.okbtn2')
 const alertbody = document.querySelector('.alert-body')
 const toast = document.getElementById('toast');
 const toastBox = document.querySelector('#toastBox');

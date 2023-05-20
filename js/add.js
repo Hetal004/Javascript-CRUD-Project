@@ -3,6 +3,7 @@ import { onDelete } from "./delete.js";
 import { postapi } from "./createUser.js";
 import { getusers } from "./getAllUsers.js";
 import { getCookie, load } from "./loginApi.js";
+import { showToast } from "./delete.js";
 
 const createUserBtn = document.querySelector(".button3");
 const btn = document.querySelector(".button");
@@ -12,6 +13,10 @@ const blur = document.querySelector(".button3");
 
 const table = document.getElementById("table");
 export const userEntries = [];
+
+const createUserMsg = "Record Added Successfully!";
+const updateMsg = "Record Updated Successfully!";
+
 
 document.getElementById("submit").onclick = async function (e) {
   e.preventDefault();
@@ -56,11 +61,15 @@ document.getElementById("submit").onclick = async function (e) {
       // handleStoreInLocal()
       const data = await postapi(entry);
       hideformbgeffects();
+      showToast(createUserMsg);
+
     } else {
     }
   } else {
     updateUserdata(tmpid);
     hideformbgeffects();
+    showToast(updateMsg);
+
   }
 
    // Inline editing of Table Data

@@ -54,6 +54,7 @@ export function editInlineData() {
     input.style.width = this.offsetWidth - (this.clientLeft * 2) + "px";
     input.style.height = this.offsetHeight;
     input.style.border = "0px";
+    input.style.borderradius = "0px";
     input.style.fontFamily = "inherit";
     input.style.fontSize = "inherit";
     input.style.textAlign = "inherit";
@@ -74,14 +75,14 @@ export function editInlineData() {
                 td.removeAttribute('data-clicked');
                 td.removeAttribute('data-text');
                 td.innerHTML = curr_text;
-                td.style.cssText = 'padding : 10px';
+                td.style.cssText = 'padding : 5px';
                 console.log(orig_text + ' is changed to ' + curr_text);
             }
             else {
                 td.removeAttribute('data-clicked');
                 td.removeAttribute('data-text');
                 td.innerHTML = curr_text;
-                td.style.cssText = 'padding : 10px';
+                td.style.cssText = 'padding : 5px';
                 console.log('No change in data !!');
             }
 
@@ -103,7 +104,7 @@ export function editInlineData() {
     }
     
     this.innerHTML = "";
-    this.style.cssText = 'padding : 10px';
+    this.style.cssText = 'padding : 5px';
     this.append(input);
     this.firstElementChild.select();
 }

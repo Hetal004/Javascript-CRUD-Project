@@ -48,12 +48,14 @@ document.getElementById("submit").onclick = async function (e) {
       const editButton = document.createElement("button");
       const textForEditButton = document.createTextNode("Edit");
       editButton.appendChild(textForEditButton);
+      editButton.className = "editBtn";
       editButton.addEventListener("click", onEdit);
       action.appendChild(editButton);
-
+      
       const deleteButton = document.createElement("button");
       const textForDeleteButton = document.createTextNode("Delete");
       deleteButton.appendChild(textForDeleteButton);
+      deleteButton.className = "deleteBtn";
       deleteButton.addEventListener("click", onDelete);
       action.appendChild(deleteButton);
 
@@ -198,12 +200,14 @@ export async function onLoad() {
       const editButton = document.createElement("button");
       const textForEditButton = document.createTextNode("Edit");
       editButton.appendChild(textForEditButton);
+      editButton.className = "editBtn";
       editButton.addEventListener("click", onEdit);
       action.appendChild(editButton);
 
       const deleteButton = document.createElement("button");
       const textForDeleteButton = document.createTextNode("Delete");
       deleteButton.appendChild(textForDeleteButton);
+      deleteButton.className = "deleteBtn";
       deleteButton.addEventListener("click", onDelete);
       action.appendChild(deleteButton);
 

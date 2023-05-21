@@ -51,14 +51,16 @@ export function editInlineData() {
     let input = document.createElement('input');
     input.setAttribute('type', 'text');
     input.value = this.innerHTML;
-    input.style.width = this.offsetWidth - (this.clientLeft * 2) + "px";
+    input.style.width = this.offsetWidth - (this.clientLeft * 10) + "px";
     input.style.height = this.offsetHeight;
     input.style.border = "0px";
-    input.style.borderradius = "0px";
+    input.style.borderRadius = "0px";
     input.style.fontFamily = "inherit";
     input.style.fontSize = "inherit";
     input.style.textAlign = "inherit";
-    input.style.backgroundColor = "#a9d9f8";
+    input.style.fontWeight = "inherit";
+    input.style.backgroundColor = "transparent";
+    input.style.color = "white";
 
     input.onblur = async function () {
             let td = input.parentElement;
@@ -75,14 +77,14 @@ export function editInlineData() {
                 td.removeAttribute('data-clicked');
                 td.removeAttribute('data-text');
                 td.innerHTML = curr_text;
-                td.style.cssText = 'padding : 5px';
+                td.style.cssText = 'padding : 2px';
                 console.log(orig_text + ' is changed to ' + curr_text);
             }
             else {
                 td.removeAttribute('data-clicked');
                 td.removeAttribute('data-text');
                 td.innerHTML = curr_text;
-                td.style.cssText = 'padding : 5px';
+                td.style.cssText = 'padding : 2px';
                 console.log('No change in data !!');
             }
 
@@ -104,7 +106,7 @@ export function editInlineData() {
     }
     
     this.innerHTML = "";
-    this.style.cssText = 'padding : 5px';
+    this.style.cssText = 'padding : 2px';
     this.append(input);
     this.firstElementChild.select();
 }
